@@ -1,11 +1,12 @@
 """
 ============================================================
-USWA AI ASSISTANT - FLASK BACKEND (AI + DATABASE)
+USWA AI ASSISTANT - FLASK BACKEND (PRODUCTION READY)
 ============================================================
-Yeh main application file hai. Ab yeh:
+Yeh main application file hai. Yeh:
 1. Google Gemini AI use karti hai (smart jawab)
 2. RAG system (sirf USWA data se jawab)
-3. Har chat database mein save karti hai (NEW!)
+3. Har chat database mein save karti hai
+4. Online deployment ke liye ready hai (Render)
 ============================================================
 """
 
@@ -18,7 +19,7 @@ import os
 # Hamara school ka data import karo
 from school_data import SCHOOL_KNOWLEDGE, get_answer
 
-# Database functions import karo (NEW!)
+# Database functions import karo
 from database import init_database, save_chat, get_all_chats, get_chat_count
 
 # ============================================================
@@ -128,43 +129,32 @@ def home():
 @app.route('/chat', methods=['POST'])
 def chat():
     """User ka message receive karke AI se jawab deta hai aur save karta hai."""
-
-    # Frontend se data nikalo
     data = request.get_json()
     user_message = data.get('message', '')
 
-    # Agar message khaali hai
     if not user_message.strip():
         return jsonify({'reply': 'Please type a question so I can help you!'})
 
-    # AI se jawab lo (RAG ke saath)
     bot_reply = get_ai_answer(user_message)
 
-    # === NEW: Chat ko database mein save karo ===
+    # Chat ko database mein save karo
     try:
         save_chat(user_message, bot_reply)
     except Exception as e:
-        # Agar save mein masla ho, to bhi jawab to dena hai
         print(f"Database Save Error: {e}")
 
-    # Jawab wapas bhejo
     return jsonify({'reply': bot_reply})
 
 
 # ============================================================
-# ROUTE 3: ADMIN - SAARI CHATS DEKHO (Bonus)
-# ============================================================
-# Yeh route saari chat history dikhata hai (simple version)
-# Browser mein kholo: http://127.0.0.1:5000/admin/chats
+# ROUTE 3: ADMIN - SAARI CHATS DEKHO
 # ============================================================
 @app.route('/admin/chats')
 def admin_chats():
     """Saari chat history dikhata hai (simple text format)."""
-
     chats = get_all_chats()
     total = get_chat_count()
 
-    # Simple HTML banao chats dikhane ke liye
     html = f"""
     <html>
     <head>
@@ -203,14 +193,17 @@ def admin_chats():
 # ============================================================
 # APP CHALAO
 # ============================================================
+# IMPORTANT: Online deployment ke liye PORT environment se aata hai
+# Local pe 5000 use hota hai, online pe Render apna PORT deta hai
+# ============================================================
 if __name__ == '__main__':
     print("=" * 50)
-    print("USWA AI Assistant (AI + Database) chal raha hai!")
-    print("Chat: http://127.0.0.1:5000")
-    print("Admin: http://127.0.0.1:5000/admin/chats")
+    print("USWA AI Assistant chal raha hai!")
     print("=" * 50)
 
     if not GEMINI_API_KEY:
         print("\nWARNING: GEMINI_API_KEY nahi mili! .env check karein.\n")
 
-    app.run(debug=True)
+    # PORT environment se lo (online ke liye), warna 5000 (local ke liye)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
