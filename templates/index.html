@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USWA AI Assistant - Education System Gilgit-Baltistan</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    
+    <div class="app-container">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            
+            <div class="sidebar-header">
+                <div class="sidebar-logo-wrapper">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="USWA Logo" class="sidebar-logo-img">
+                </div>
+                <div class="sidebar-brand">
+                    <h2>USWA</h2>
+                    <span>AI Assistant</span>
+                </div>
+            </div>
+            
+            <button class="new-chat-btn" id="newChatBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
+                <span>New Chat</span>
+            </button>
+            
+            <div class="chat-history">
+                <p class="history-label">Recent Chats</p>
+                <div class="history-item active">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span>Welcome Chat</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="theme-toggle" id="themeToggle">
+                    <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <span>Toggle Theme</span>
+                </button>
+                
+                <div class="school-info">
+                    <p class="school-name">Uswa Yultar Education System</p>
+                    <p class="school-location">📍 Gilgit-Baltistan</p>
+                </div>
+            </div>
+            
+        </aside>
+        
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            
+            <header class="top-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12h18M3 6h18M3 18h18"/>
+                    </svg>
+                </button>
+                
+                <div class="header-title">
+                    <h1>USWA AI Assistant</h1>
+                    <span class="status-badge">
+                        <span class="status-dot"></span>
+                        Online
+                    </span>
+                </div>
+                
+                <button class="clear-btn" id="clearBtn" title="Clear Chat">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                </button>
+            </header>
+            
+            <div class="chat-area" id="chatArea">
+                
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-logo-wrapper">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="USWA School Logo" class="welcome-logo-img">
+                    </div>
+                    <h1 class="welcome-title">
+                        <span class="gradient-text">Welcome!</span>
+                    </h1>
+                    <p class="welcome-subtitle">
+                        I am the <strong>Uswa Yultar Education System</strong> AI Assistant.<br>
+                        Feel free to ask me anything about our school.
+                    </p>
+                    
+                    <div class="action-cards">
+                        <div class="action-card" data-question="What is the admission procedure?">
+                            <div class="card-icon admissions">📝</div>
+                            <h3>Admissions</h3>
+                            <p>Admission details and procedure</p>
+                        </div>
+                        
+                        <div class="action-card" data-question="What is the fee structure?">
+                            <div class="card-icon fees">💰</div>
+                            <h3>Fee Structure</h3>
+                            <p>Fees for different classes</p>
+                        </div>
+                        
+                        <div class="action-card" data-question="What are the school timings?">
+                            <div class="card-icon timings">🕐</div>
+                            <h3>Timings</h3>
+                            <p>School opening and closing hours</p>
+                        </div>
+                        
+                        <div class="action-card" data-question="Show me the list of subjects">
+                            <div class="card-icon subjects">📚</div>
+                            <h3>Subjects</h3>
+                            <p>Subjects offered at our school</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="messages-container" id="messagesContainer"></div>
+                
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-avatar">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Bot" class="typing-avatar-img">
+                    </div>
+                    <div class="typing-bubble">
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="input-area">
+                
+                <div class="quick-suggestions" id="quickSuggestions">
+                    <button class="suggestion-pill">📝 Admissions</button>
+                    <button class="suggestion-pill">💰 Fees</button>
+                    <button class="suggestion-pill">🕐 Timings</button>
+                    <button class="suggestion-pill">📅 Holidays</button>
+                    <button class="suggestion-pill">👨‍🏫 Teachers</button>
+                    <button class="suggestion-pill">📞 Contact</button>
+                </div>
+                
+                <div class="input-container">
+                    <textarea 
+                        id="userInput" 
+                        class="user-input" 
+                        placeholder="Ask USWA AI anything..."
+                        rows="1"
+                    ></textarea>
+                    
+                    <button class="send-btn" id="sendBtn" title="Send Message">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <p class="input-footer">
+                    USWA AI Assistant • Made with ❤️ for Uswa Yultar Education System
+                </p>
+            </div>
+            
+        </main>
+        
+    </div>
+    
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- JavaScript File -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+</body>
+</html>
