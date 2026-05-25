@@ -31,12 +31,95 @@ SCHOOL_KNOWLEDGE = {
             "Creative and professional alumni network"
         ],
         "professional_answer": (
-            "USWA Education System (Uswa Boys Public School and College) is located "
+            "USWA Education System Yultar (Uswa Boys Public School and College) is located "
             "in Yultar, Skardu, and was established in 1994. With a proud history of "
             "over three decades, the school currently serves approximately 1,823 students. "
             "Our mission is simple yet powerful: 'Education For All'. "
             "We take pride in our excellent board results and a strong network of "
             "creative and professional alumni."
+        )
+    },
+
+    # --------------------------------------------------------
+    # PRINCIPAL'S MESSAGE
+    # --------------------------------------------------------
+    "principal_message": {
+        "principal_name": "Muhammad Kazim",
+        "designation": "Principal, Uswa Boys College Yultar",
+        "professional_answer": (
+            "Principal's Message:\n\n"
+            "It is with great pride and enthusiasm that I extend a warm welcome to all "
+            "visitors, students, parents, and staff who are part of our vibrant community. "
+            "As the Principal of this esteemed institution, I am committed to ensuring that "
+            "Uswa Boys College Yultar continues to provide a high standard of education, "
+            "fostering an environment of academic excellence, moral development, and "
+            "leadership.\n\n"
+            "Our college is more than just a place of learning; it is a nurturing space "
+            "where students are encouraged to explore their talents, pursue their passions, "
+            "and prepare themselves for the challenges and opportunities of tomorrow's world. "
+            "We focus on the holistic development of our students, emphasizing not just "
+            "academics, but also personal growth, discipline, and social responsibility.\n\n"
+            "- Muhammad Kazim, Principal, Uswa Boys College Yultar"
+        )
+    },
+
+    # --------------------------------------------------------
+    # MISSION & VISION
+    # --------------------------------------------------------
+    "mission_vision": {
+        "professional_answer": (
+            "Our Mission:\n\n"
+            "Our mission is to provide a nurturing environment that fosters academic "
+            "excellence, personal growth, and the development of leadership skills in our "
+            "students. We are committed to offering a comprehensive education that equips "
+            "students with the knowledge, values, and confidence needed to succeed in a "
+            "dynamic world. Through a blend of quality teaching, innovative learning methods, "
+            "and extracurricular engagement, we aim to inspire and empower our students to "
+            "become change-makers in their communities and beyond.\n\n"
+            "Our Vision:\n\n"
+            "Our vision is to be a premier institution for education in the region, known for "
+            "producing confident, capable, and compassionate leaders who make meaningful "
+            "contributions to society. Uswa Boys College Yultar strives to be a beacon of "
+            "excellence in education, where every student is encouraged to reach his full "
+            "potential and pursue his dreams. We aim to cultivate a progressive, inclusive, "
+            "and empowering academic environment that prepares students to excel in all "
+            "spheres of life."
+        )
+    },
+
+    # --------------------------------------------------------
+    # WHAT MAKES US UNIQUE (Special Features)
+    # --------------------------------------------------------
+    "unique_features": {
+        "highlights": [
+            "Hands-on practical learning, not just theory",
+            "Real-world project-based education",
+            "Coding education: Python programming",
+            "Arduino and electronics / robotics training",
+            "Block-based coding for younger students (beginner-friendly path)",
+            "Game development exposure",
+            "A clear, structured pathway into the world of technology"
+        ],
+        "professional_answer": (
+            "What makes Uswa Boys College Yultar unique:\n\n"
+            "Unlike conventional schools that focus only on textbook learning, we believe in "
+            "preparing our students for the real world by combining strong academics with "
+            "practical, hands-on skills.\n\n"
+            "Here is what sets us apart:\n\n"
+            "1. Practical, Project-Based Learning: Our students don't just memorize concepts, "
+            "they apply them. We regularly engage students in real projects that build "
+            "critical thinking and problem-solving abilities.\n\n"
+            "2. Coding and Programming: We teach modern, industry-relevant skills including "
+            "Python programming, giving our students a head start in the digital age.\n\n"
+            "3. Arduino, Electronics and Robotics: Students get hands-on experience with "
+            "Arduino and electronics, learning how technology works from the ground up.\n\n"
+            "4. Block Coding for Beginners: For our younger students, we offer beginner-friendly "
+            "block-based coding, providing a smooth and structured pathway into the world of "
+            "programming.\n\n"
+            "5. Game Development: We introduce students to the fundamentals of game development, "
+            "turning their creativity into real, working projects.\n\n"
+            "In short, we don't just educate, we empower our students with future-ready skills "
+            "that prepare them for the careers and opportunities of tomorrow."
         )
     },
 
@@ -61,7 +144,7 @@ SCHOOL_KNOWLEDGE = {
         "admission_timing": "Admissions open in March every year",
         "classes_offered": "Nursery to College level",
         "professional_answer": (
-            "Admissions at USWA Education System follow a simple three-step process:\n\n"
+            "Admissions at USWA Education System Yultar follow a simple three-step process:\n\n"
             "1. Submit the Admission Form (Form Fee: Rs. 500)\n"
             "2. Appear for the Entry Test\n"
             "3. Attend the Interview\n\n"
@@ -94,7 +177,7 @@ SCHOOL_KNOWLEDGE = {
         "payment_method": "Cash",
         "late_fee": "None",
         "professional_answer": (
-            "Here is the complete fee structure at USWA Education System:\n\n"
+            "Here is the complete fee structure at USWA Education System Yultar:\n\n"
             "Monthly Tuition Fees:\n"
             "• Nursery / KG: Rs. 2,800\n"
             "• Class 1 - 5: Rs. 3,200\n"
@@ -142,7 +225,7 @@ SCHOOL_KNOWLEDGE = {
         "spring_break": "None",
         "other_holidays": "National Holidays and Religious Holidays",
         "professional_answer": (
-            "Here is the holiday schedule at USWA Education System:\n\n"
+            "Here is the holiday schedule at USWA Education System Yultar:\n\n"
             "• Summer Break: Approximately 20 days\n"
             "• Winter Break: Approximately 75 days (longer due to the cold climate of Skardu)\n"
             "• Eid Holidays: 10 days for each Eid\n\n"
@@ -161,7 +244,7 @@ SCHOOL_KNOWLEDGE = {
         "staff_ratio": "50:50 (Male to Female)",
         "special_features": "Subject specialists for all subjects",
         "professional_answer": (
-            "USWA Education System takes great pride in its qualified teaching faculty.\n\n"
+            "USWA Education System Yultar takes great pride in its qualified teaching faculty.\n\n"
             "• Principal: Mr. Muhammad Kazim\n"
             "• Total Teaching Staff: 109 teachers\n"
             "• Qualifications: Most teachers hold MS and BS degrees\n"
@@ -183,7 +266,7 @@ SCHOOL_KNOWLEDGE = {
         "extra_curricular": "Sports, Debates, and Science & IT Exhibitions",
         "facilities": "Computer Lab, Library, Science Lab, and Sports Ground",
         "professional_answer": (
-            "USWA Education System follows the Federal Board curriculum with instruction "
+            "USWA Education System Yultar follows the Federal Board curriculum with instruction "
             "in both Urdu and English.\n\n"
             "Subjects by Level:\n"
             "• Primary (Class 1-5): Urdu, English, Mathematics, Phonics, and Islamiat\n"
@@ -208,7 +291,7 @@ SCHOOL_KNOWLEDGE = {
         "facebook": "https://www.facebook.com/p/Uswa-Public-School-College-Yultar-Skardu-",
         "principal_contact": "0343-5576948",
         "professional_answer": (
-            "You can reach USWA Education System through any of the following:\n\n"
+            "You can reach USWA Education System Yultar through any of the following:\n\n"
             "• Phone: 05815-555202\n"
             "• WhatsApp: 0343-5576948\n"
             "• Email: uswaboysyultar@gmail.com\n"
