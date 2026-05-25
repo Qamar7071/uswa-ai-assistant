@@ -1,18 +1,18 @@
 """
 ============================================================
-USWA AI ASSISTANT - FLASK BACKEND (PRODUCTION READY)
+USWA AI ASSISTANT - FLASK BACKEND (GROQ POWERED)
 ============================================================
-Yeh main application file hai. Yeh:
-1. Google Gemini AI use karti hai (smart jawab)
+Yeh main application file hai. Ab yeh Groq AI use karti hai:
+1. Groq (Llama 3.3) - bohot tez aur 14,400 free requests/day
 2. RAG system (sirf USWA data se jawab)
 3. Har chat database mein save karti hai
-4. Online deployment ke liye ready hai (Render)
+4. Online deployment ke liye ready
 ============================================================
 """
 
 # Zaroori libraries import karo
 from flask import Flask, render_template, request, jsonify
-import google.generativeai as genai
+from groq import Groq
 from dotenv import load_dotenv
 import os
 
@@ -26,13 +26,16 @@ from database import init_database, save_chat, get_all_chats, get_chat_count
 # ENVIRONMENT VARIABLES LOAD KARO (.env file se)
 # ============================================================
 load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # ============================================================
-# GEMINI AI SETUP
+# GROQ AI SETUP
 # ============================================================
-genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-2.5-flash")
+# Groq client banao API key ke saath
+client = Groq(api_key=GROQ_API_KEY)
+
+# Model select karo (Llama 3.3 - smart aur tez)
+AI_MODEL = "llama-3.3-70b-versatile"
 
 
 # ============================================================
@@ -40,9 +43,7 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 # ============================================================
 app = Flask(__name__)
 
-# ============================================================
-# DATABASE READY KARO (app start hote hi)
-# ============================================================
+# Database ready karo
 init_database()
 
 
@@ -62,11 +63,11 @@ def get_full_school_data():
 # ============================================================
 # SYSTEM PROMPT - AI KO INSTRUCTIONS DENA
 # ============================================================
-def create_system_prompt(user_message):
-    """User ke sawal ke saath complete prompt banata hai."""
+def create_system_prompt():
+    """AI ka system prompt banata hai (rules + school data)."""
     school_data = get_full_school_data()
 
-    prompt = f"""You are the official AI Assistant for USWA Education System 
+    system_prompt = f"""You are the official AI Assistant for USWA Education System 
 (Uswa Boys Public School and College, Yultar, Skardu).
 
 YOUR ROLE:
@@ -88,23 +89,35 @@ USWA EDUCATION SYSTEM - OFFICIAL INFORMATION:
 =================================================
 {school_data}
 =================================================
-
-USER'S QUESTION: {user_message}
-
-Your helpful response:"""
-
-    return prompt
+"""
+    return system_prompt
 
 
 # ============================================================
-# AI SE JAWAB LENA
+# AI SE JAWAB LENA (GROQ)
 # ============================================================
 def get_ai_answer(user_message):
-    """Gemini AI se professional jawab leta hai."""
+    """Groq AI se professional jawab leta hai."""
     try:
-        prompt = create_system_prompt(user_message)
-        response = model.generate_content(prompt)
-        return response.text.strip()
+        # System prompt (rules + data) banao
+        system_prompt = create_system_prompt()
+
+        # Groq ko message bhejo
+        # System message = rules + data
+        # User message = sawal
+        response = client.chat.completions.create(
+            model=AI_MODEL,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message}
+            ],
+            temperature=0.7,  # Thora creative lekin focused
+            max_tokens=1024   # Jawab ki max length
+        )
+
+        # Jawab nikalo aur return karo
+        return response.choices[0].message.content.strip()
+
     except Exception as e:
         print(f"AI Error: {e}")
         return (
@@ -135,9 +148,10 @@ def chat():
     if not user_message.strip():
         return jsonify({'reply': 'Please type a question so I can help you!'})
 
+    # AI se jawab lo
     bot_reply = get_ai_answer(user_message)
 
-    # Chat ko database mein save karo
+    # Database mein save karo
     try:
         save_chat(user_message, bot_reply)
     except Exception as e:
@@ -151,7 +165,7 @@ def chat():
 # ============================================================
 @app.route('/admin/chats')
 def admin_chats():
-    """Saari chat history dikhata hai (simple text format)."""
+    """Saari chat history dikhata hai."""
     chats = get_all_chats()
     total = get_chat_count()
 
@@ -193,17 +207,13 @@ def admin_chats():
 # ============================================================
 # APP CHALAO
 # ============================================================
-# IMPORTANT: Online deployment ke liye PORT environment se aata hai
-# Local pe 5000 use hota hai, online pe Render apna PORT deta hai
-# ============================================================
 if __name__ == '__main__':
     print("=" * 50)
-    print("USWA AI Assistant chal raha hai!")
+    print("USWA AI Assistant (Groq Powered) chal raha hai!")
     print("=" * 50)
 
-    if not GEMINI_API_KEY:
-        print("\nWARNING: GEMINI_API_KEY nahi mili! .env check karein.\n")
+    if not GROQ_API_KEY:
+        print("\nWARNING: GROQ_API_KEY nahi mili! .env check karein.\n")
 
-    # PORT environment se lo (online ke liye), warna 5000 (local ke liye)
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
