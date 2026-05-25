@@ -22,7 +22,7 @@ SCHOOL_KNOWLEDGE = {
     # --------------------------------------------------------
     "school_info": {
         "full_name": "Uswa Boys Public School and College, Yultar, Skardu",
-        "short_name": "USWA Education System",
+        "short_name": "USWA Education System Yultar",
         "established": "1994",
         "total_students": "1,823",
         "mission": "Education For All",
