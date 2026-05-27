@@ -35,8 +35,11 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 # Groq client banao API key ke saath
 client = Groq(api_key=GROQ_API_KEY)
 
-# Model select karo (Llama 3.3 - smart aur tez)
-AI_MODEL = "llama-3.3-70b-versatile"
+# Model select karo
+# "llama-3.3-70b-versatile" = sab se smart, lekin kam daily limit (100k tokens/day)
+# "llama-3.1-8b-instant"    = thora kam smart, lekin BOHOT zyada limit (500k tokens/day) aur tez
+# Launch ke liye 8b-instant behtar hai (zyada users handle karega)
+AI_MODEL = "llama-3.1-8b-instant"
 
 
 # ============================================================
@@ -152,17 +155,44 @@ USWA EDUCATION SYSTEM - OFFICIAL INFORMATION:
 
 
 # ============================================================
-# AI SE JAWAB LENA (GROQ)
+# CACHING SYSTEM (Tokens Bachane Ke Liye)
+# ============================================================
+# Yeh common sawalon ke jawab memory mein save karta hai.
+# Same sawal dobara aaye to AI use nahi hota - turant jawab,
+# aur tokens bilkul nahi lagte!
+# ============================================================
+
+# Cache: sawal (lowercase) -> jawab
+ANSWER_CACHE = {}
+
+# Cache ko clean karne ke liye max size (memory bachane ke liye)
+CACHE_MAX_SIZE = 200
+
+
+def normalize_question(text):
+    """Sawal ko standard banata hai (cache matching ke liye)."""
+    # Lowercase + extra spaces hatao
+    return " ".join(text.lower().strip().split())
+
+
+# ============================================================
+# AI SE JAWAB LENA (GROQ) - WITH CACHING
 # ============================================================
 def get_ai_answer(user_message):
-    """Groq AI se professional jawab leta hai."""
+    """Groq AI se professional jawab leta hai (caching ke saath)."""
+
+    # Pehle cache check karo - agar yeh sawal pehle poocha gaya hai
+    cache_key = normalize_question(user_message)
+    if cache_key in ANSWER_CACHE:
+        # Cache mein jawab hai! AI use nahi karenge - tokens bach gaye!
+        print(f"[CACHE HIT] '{user_message[:40]}' - AI use nahi hua, tokens bache!")
+        return ANSWER_CACHE[cache_key]
+
     try:
         # System prompt (rules + data) banao
         system_prompt = create_system_prompt()
 
         # Groq ko message bhejo
-        # System message = rules + data
-        # User message = sawal
         response = client.chat.completions.create(
             model=AI_MODEL,
             messages=[
@@ -170,11 +200,19 @@ def get_ai_answer(user_message):
                 {"role": "user", "content": user_message}
             ],
             temperature=0.7,  # Thora creative lekin focused
-            max_tokens=1024   # Jawab ki max length
+            max_tokens=800    # Jawab ki max length (kam = kam tokens)
         )
 
-        # Jawab nikalo aur return karo
-        return response.choices[0].message.content.strip()
+        # Jawab nikalo
+        bot_reply = response.choices[0].message.content.strip()
+
+        # Cache mein save karo (agar cache bhar gaya to purana hata do)
+        if len(ANSWER_CACHE) >= CACHE_MAX_SIZE:
+            # Sab se purana entry hata do (memory bachane ke liye)
+            ANSWER_CACHE.pop(next(iter(ANSWER_CACHE)))
+        ANSWER_CACHE[cache_key] = bot_reply
+
+        return bot_reply
 
     except Exception as e:
         print(f"AI Error: {e}")
