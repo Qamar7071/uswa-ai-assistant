@@ -15,7 +15,14 @@ Saara data 'database/school.db' file mein save hota hai.
 import sqlite3
 from datetime import datetime
 import os
+from datetime import datetime
 
+def get_today_info():
+    today = datetime.now()
+    day_name = today.strftime("%A")  # Monday, Tuesday...
+    date = today.strftime("%d %B %Y")  # 27 May 2026
+    is_sunday = (day_name == "Sunday")
+    return day_name, date, is_sunday
 # ============================================================
 # DATABASE FILE KA PATH
 # ============================================================

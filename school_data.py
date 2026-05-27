@@ -219,18 +219,35 @@ SCHOOL_KNOWLEDGE = {
     # 5. HOLIDAYS
     # --------------------------------------------------------
     "holidays": {
-        "summer_break": "20 days",
-        "winter_break": "75 days",
+        "summer_break": "Approximately 20 days (around June-July)",
+        "winter_break": "Approximately 75 days (around December-February, due to cold Skardu climate)",
         "eid_holidays": "10 days per Eid",
         "spring_break": "None",
+        "weekly_off": "Sunday",
         "other_holidays": "National Holidays and Religious Holidays",
         "professional_answer": (
             "Here is the holiday schedule at USWA Education System Yultar:\n\n"
-            "• Summer Break: Approximately 20 days\n"
-            "• Winter Break: Approximately 75 days (longer due to the cold climate of Skardu)\n"
-            "• Eid Holidays: 10 days for each Eid\n\n"
-            "In addition, the school observes all National Holidays and Religious Holidays. "
-            "Exact dates are announced in advance through official school notices."
+            "WEEKLY OFF:\n"
+            "- Sunday is a weekly holiday. School remains closed every Sunday.\n\n"
+            "SCHOOL VACATIONS (approximate):\n"
+            "- Summer Break: Around 20 days (usually in June-July)\n"
+            "- Winter Break: Around 75 days (usually December to February, longer due to the cold climate of Skardu)\n"
+            "- Eid Holidays: 10 days for each Eid\n\n"
+            "NATIONAL HOLIDAYS (school closed):\n"
+            "- 5 February: Kashmir Solidarity Day\n"
+            "- 23 March: Pakistan Day\n"
+            "- 1 May: Labour Day\n"
+            "- 14 August: Independence Day\n"
+            "- 9 November: Iqbal Day\n"
+            "- 25 December: Quaid-e-Azam Day\n\n"
+            "RELIGIOUS HOLIDAYS (school closed):\n"
+            "- Eid-ul-Fitr (3 days)\n"
+            "- Eid-ul-Azha (3-4 days)\n"
+            "- Ashura / Muharram (9th and 10th Muharram)\n"
+            "- Eid Milad-un-Nabi (12th Rabi-ul-Awwal)\n\n"
+            "IMPORTANT NOTE: Religious holiday dates depend on the lunar (moon) calendar "
+            "and change every year. The exact dates are announced in advance through official "
+            "school notices. For confirmation, please contact the school office at 05815-555202."
         )
     },
 

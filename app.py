@@ -15,6 +15,7 @@ from flask import Flask, render_template, request, jsonify
 from groq import Groq
 from dotenv import load_dotenv
 import os
+from datetime import datetime, timedelta, timezone
 
 # Hamara school ka data import karo
 from school_data import SCHOOL_KNOWLEDGE, get_answer
@@ -61,11 +62,41 @@ def get_full_school_data():
 
 
 # ============================================================
+# AAJ KI DATE AUR DIN (Pakistan Time)
+# ============================================================
+def get_today_info():
+    """Aaj ki date aur din nikalta hai (Pakistan timezone PKT = UTC+5)."""
+    # Pakistan timezone (UTC + 5 hours)
+    pakistan_time = datetime.now(timezone.utc) + timedelta(hours=5)
+    day_name = pakistan_time.strftime("%A")       # Monday, Tuesday...
+    date_str = pakistan_time.strftime("%d %B %Y")  # 27 May 2026
+    is_sunday = (day_name == "Sunday")
+    return day_name, date_str, is_sunday
+
+
+# ============================================================
 # SYSTEM PROMPT - AI KO INSTRUCTIONS DENA
 # ============================================================
 def create_system_prompt():
-    """AI ka system prompt banata hai (rules + school data)."""
+    """AI ka system prompt banata hai (rules + school data + aaj ki date)."""
     school_data = get_full_school_data()
+
+    # Aaj ki date aur din nikalo
+    day_name, date_str, is_sunday = get_today_info()
+    sunday_note = "Today is Sunday, so the school is CLOSED (weekly off)." if is_sunday \
+        else f"Today is {day_name}, a regular school day (school is open, timing 8:00 AM to 2:15 PM)."
+
+    today_info = (
+        f"\n=================================================\n"
+        f"TODAY'S DATE INFORMATION (use this for 'is school open today' type questions):\n"
+        f"- Today's date: {date_str}\n"
+        f"- Today's day: {day_name}\n"
+        f"- {sunday_note}\n"
+        f"- IMPORTANT: For religious holidays (Eid, etc.), the dates change every year based "
+        f"on the moon. If today might be near a religious holiday, tell the user to confirm "
+        f"with the school office, since you cannot be 100% sure of exact religious holiday dates.\n"
+        f"=================================================\n"
+    )
 
     system_prompt = f"""You are the official AI Assistant for USWA Education System 
 (Uswa Boys Public School and College, Yultar, Skardu).
@@ -91,7 +122,10 @@ IMPORTANT RULES:
    Email: qamarjamal7071@gmail.com
    Phone/WhatsApp: 0340-8280700
    For school-related questions, I'm always here to help!"
-
+9. SCHOOL OPEN/CLOSED: When someone asks if school is open or closed today, use the 
+   "Today's Date Information" section below. Check the day and the holiday schedule. 
+   For religious holidays whose exact dates you are unsure of, advise confirming with the office.
+{today_info}
 =================================================
 USWA EDUCATION SYSTEM - OFFICIAL INFORMATION:
 =================================================
