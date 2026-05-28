@@ -247,6 +247,27 @@ button {
     text-align: center;
 }
 
+.info-notice {
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    border-left: 3px solid #1BA5E0;
+    margin-bottom: 12px;
+}
+
+.info-notice-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1BA5E0;
+    margin-bottom: 5px;
+}
+
+.info-notice-text {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+}
+
 .school-name {
     font-size: 13px;
     font-weight: 600;
