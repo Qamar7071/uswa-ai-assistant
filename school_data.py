@@ -124,6 +124,35 @@ SCHOOL_KNOWLEDGE = {
     },
 
     # --------------------------------------------------------
+    # STUDY ROUTINE / AFTER-SCHOOL DAILY SCHEDULE
+    # --------------------------------------------------------
+    "study_routine": {
+        "professional_answer": (
+            "Here is a recommended after-school daily routine to help students stay healthy, "
+            "active, and successful. (School ends at 2:15 PM; student reaches home around 3:00 PM)\n\n"
+            "3:00 - 3:30 PM: Reach home, freshen up, change clothes, wash up.\n"
+            "3:30 - 4:00 PM: Have lunch calmly, without rushing.\n"
+            "4:00 - 4:45 PM: Short rest / Zuhr prayer / relax a little.\n"
+            "4:45 - 6:00 PM: Homework and today's lessons - this is the most important study time "
+            "when the mind is fresh.\n"
+            "6:00 - 7:00 PM: Play outside / sports / exercise - keeps the body active and mind fresh.\n"
+            "7:00 - 7:30 PM: Maghrib prayer and a little rest.\n"
+            "7:30 - 8:30 PM: Revision - review what was learned today and prepare for tomorrow.\n"
+            "8:30 - 9:15 PM: Dinner and quality time with family.\n"
+            "9:15 - 9:45 PM: Light reading / pack school bag for tomorrow / Isha prayer.\n"
+            "9:45 - 10:00 PM: Turn off screens, prepare for sleep.\n"
+            "10:00 PM: Sleep (8-9 hours of sleep is very important for students).\n\n"
+            "GOLDEN RULES FOR SUCCESS:\n"
+            "- Sleep 8 to 9 hours every night.\n"
+            "- Limit screen time (mobile, TV) especially before bed.\n"
+            "- Eat healthy, home-cooked food.\n"
+            "- Study a little every day - consistency is better than cramming.\n"
+            "- Balance study with play and rest - both are important.\n\n"
+            "Remember: A healthy, balanced routine helps you learn better and stay happy!"
+        )
+    },
+
+    # --------------------------------------------------------
     # 2. ADMISSIONS
     # --------------------------------------------------------
     "admissions": {
